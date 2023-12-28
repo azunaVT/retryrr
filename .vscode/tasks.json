@@ -3,37 +3,17 @@
     "tasks": [
         {
             "label": "build",
-            "command": "dotnet",
+            "command": "make",
             "type": "process",
-            "args": [
-                "build",
-                "${workspaceFolder}/src/Retryrr/Retryrr.csproj",
-                "/property:GenerateFullPaths=true",
-                "/consoleloggerparameters:NoSummary;ForceNoAlign"
-            ],
-            "problemMatcher": "$msCompile"
-        },
-        {
-            "label": "publish",
-            "command": "dotnet",
-            "type": "process",
-            "args": [
-                "publish",
-                "${workspaceFolder}/src/Retryrr/Retryrr.csproj",
-                "/property:GenerateFullPaths=true",
-                "/consoleloggerparameters:NoSummary;ForceNoAlign"
-            ],
+            "args": [],
             "problemMatcher": "$msCompile"
         },
         {
             "label": "watch",
-            "command": "dotnet",
+            "command": "make",
             "type": "process",
             "args": [
                 "watch",
-                "run",
-                "--project",
-                "${workspaceFolder}/src/Retryrr/Retryrr.csproj"
             ],
             "problemMatcher": "$msCompile"
         }
