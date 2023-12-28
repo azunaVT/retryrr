@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Retryrr.Core", "src\Core\Re
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Retryrr.Application", "src\Application\Retryrr.Application.csproj", "{C3464FF3-AB40-462E-A1B6-8BE6F4963C68}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Retryrr.Infra", "src\Infra\Retryrr.Infra.csproj", "{242055EC-FCF5-474A-9599-915ADAEA26F9}"
+EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "root", "root", "{2775881B-88E1-4D0F-B51F-360A9F67DC19}"
 	ProjectSection(SolutionItems) = preProject
 		LICENSE = LICENSE
@@ -40,6 +42,10 @@ Global
 		{C3464FF3-AB40-462E-A1B6-8BE6F4963C68}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C3464FF3-AB40-462E-A1B6-8BE6F4963C68}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C3464FF3-AB40-462E-A1B6-8BE6F4963C68}.Release|Any CPU.Build.0 = Release|Any CPU
+		{242055EC-FCF5-474A-9599-915ADAEA26F9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{242055EC-FCF5-474A-9599-915ADAEA26F9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{242055EC-FCF5-474A-9599-915ADAEA26F9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{242055EC-FCF5-474A-9599-915ADAEA26F9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

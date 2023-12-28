@@ -1,5 +1,20 @@
-﻿// using var proxy = new RetryrrProxy()
+﻿using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
+using Retryrr.Application;
+using Retryrr.Infra;
 
-// proxy.Start();
+var builder = Host.CreateApplicationBuilder(new HostApplicationBuilderSettings
+   {
+      ApplicationName = "Retryrr",
+   });
 
-Console.WriteLine("Hello World!");
+// Add configuration from environment variables
+builder.Configuration.AddEnvironmentVariables(prefix: "RETRYRR_");
+
+// Configure the app
+builder.ConfigureInfra();
+builder.ConfigureApplication();
+
+// Build and run
+await builder.Build().RunAsync();
