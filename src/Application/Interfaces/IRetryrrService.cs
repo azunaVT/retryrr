@@ -2,7 +2,5 @@
 
 public interface IRetryrrService
 {
-   public bool RegisterHandler(IRequestHandler handler);
-
-   public Task DoSomething(CancellationToken cancellationToken);
+   public void DoSomething(CancellationToken cancellationToken);
 }
