@@ -10,9 +10,9 @@
             "request": "launch",
             "preLaunchTask": "build",
             // If you have changed target frameworks, make sure to update the program path.
-            "program": "${workspaceFolder}/src/Retryrr/bin/Debug/net8.0/Retryrr.dll",
+            "program": "${workspaceFolder}/src/Console/bin/Debug/net8.0/Retryrr.Console.dll",
             "args": [],
-            "cwd": "${workspaceFolder}/src/Retryrr",
+            "cwd": "${workspaceFolder}",
             "stopAtEntry": false,
             // Enable launching a web browser when ASP.NET Core starts. For more information: https://aka.ms/VSCode-CS-LaunchJson-WebBrowser
             "serverReadyAction": {
