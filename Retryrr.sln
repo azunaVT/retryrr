@@ -14,6 +14,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "root", "root", "{2775881B-8
 		LICENSE = LICENSE
 		README.md = README.md
 		Makefile = Makefile
+		Dockerfile = Dockerfile
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".vscode", ".vscode", "{BBE92CD5-5C09-4DAA-86B8-3CC642B8711B}"
