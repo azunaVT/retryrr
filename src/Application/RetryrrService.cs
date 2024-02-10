@@ -93,7 +93,7 @@ public sealed class RetryrrService : BackgroundService
       // Some test stuff with the context.
       var url = context.Request.Url?.AbsolutePath;
       this._logger.LogInformation($"Handling request : {url}");
-      context.Response.OutputStream.Write("Ayyyy!"u8);
+      context.Response.OutputStream.Write("Request Handled!"u8);
       context.Response.OutputStream.Close();
    }
 }
