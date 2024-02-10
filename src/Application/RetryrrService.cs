@@ -87,8 +87,7 @@ public sealed class RetryrrService : BackgroundService
       // Make sure to begin another context so we can handle the next requests
       this._listener.BeginGetContext(this.HandleRequest);
       
-      // Send the request to the chain of handlers.
-      
+      //TODO: Send the request to the chain of handlers here.
 
       // Some test stuff with the context.
       var url = context.Request.Url?.AbsolutePath;
