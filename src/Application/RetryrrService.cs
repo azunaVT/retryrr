@@ -8,6 +8,7 @@ namespace Retryrr.Application;
 
 public sealed class RetryrrService : BackgroundService
 {
+   private const int Port = 8888;
    private readonly ILogger<RetryrrService> _logger;
 
    private readonly IHostApplicationLifetime _applicationLifetime;
@@ -35,7 +36,7 @@ public sealed class RetryrrService : BackgroundService
    {
       this._logger.LogInformation("Retryrr Service is starting...");
       this._listener = new HttpListener();
-      this._listener.Prefixes.Add("http://*:8888/");
+      this._listener.Prefixes.Add($"http://*:{Port}/");
       
       // Change the handlers to a queue
       this._handlers = this._handlers.ToQueue();
@@ -53,7 +54,7 @@ public sealed class RetryrrService : BackgroundService
       try
       {
          this._listener.Start();
-         this._logger.LogInformation("Listening on port 8888...");
+         this._logger.LogInformation($"Listening on port {Port}...");
 
          while (!cancellationToken.IsCancellationRequested)
          {
