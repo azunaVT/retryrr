@@ -1,4 +1,4 @@
-﻿namespace Retryrr.Application;
+﻿namespace Retryrr.Application.Interfaces;
 
 public interface IRequestHandler : IComparable
 {

@@ -1,6 +1,7 @@
 ﻿using System.Net;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Retryrr.Application.Interfaces;
 using Retryrr.Application.Utils;
 
 namespace Retryrr.Application;
@@ -82,11 +83,16 @@ public sealed class RetryrrService : BackgroundService
       }
 
       var context = this._listener.EndGetContext(result);
-      this._listener.BeginGetContext(this.HandleRequest);
-      var url = context.Request.Url?.AbsolutePath;
-
-      this._logger.LogInformation($"Handling request : {url}");
       
+      // Make sure to begin another context so we can handle the next requests
+      this._listener.BeginGetContext(this.HandleRequest);
+      
+      // Send the request to the chain of handlers.
+      
+
+      // Some test stuff with the context.
+      var url = context.Request.Url?.AbsolutePath;
+      this._logger.LogInformation($"Handling request : {url}");
       context.Response.OutputStream.Write("Ayyyy!"u8);
       context.Response.OutputStream.Close();
    }
