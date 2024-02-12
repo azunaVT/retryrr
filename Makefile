@@ -9,6 +9,6 @@ watch:
 run:
 	dotnet run --project src/Console/Retryrr.Console.csproj
 docker-build:
-	docker build -t retryrr -f Dockerfile .
+	docker buildx build -t retryrr -f Dockerfile . --no-cache
 docker-run:
-	docker run -it --rm retryrr
+	docker run -it --rm retryrr --publish-all --name retryrr-dev

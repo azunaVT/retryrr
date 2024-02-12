@@ -23,59 +23,38 @@ public sealed class RetryrrService : BackgroundService
    {
       this._logger = logger;
       this._handlers = handlers;
+      this._applicationLifetime = applicationLifetime;
 
       // Start & stop messages
-      applicationLifetime.ApplicationStarted.Register(() =>
+      this._applicationLifetime.ApplicationStarted.Register(() =>
          this._logger.LogInformation("Retryrr Service started."));
-      applicationLifetime.ApplicationStopped.Register(() =>
-         this._logger.LogInformation("Retryrr Service stopped."));
-      this._applicationLifetime = applicationLifetime;
-   }
-
-   public override Task StartAsync(CancellationToken cancellationToken)
-   {
-      this._logger.LogInformation("Retryrr Service is starting...");
-      this._listener = new HttpListener();
-      this._listener.Prefixes.Add($"http://*:{Port}/");
-      
-      // Change the handlers to a queue
-      this._handlers = this._handlers.ToQueue();
-      return base.StartAsync(cancellationToken);
-   }
-
-   public override Task StopAsync(CancellationToken cancellationToken)
-   {
-      this._logger.LogInformation("Retryrr Service is stopping...");
-      return base.StopAsync(cancellationToken);
+      this._applicationLifetime.ApplicationStopping.Register(() =>
+      {
+         this._logger.LogInformation("Retryrr Service stopped.");
+      });
    }
 
    protected override async Task ExecuteAsync(CancellationToken cancellationToken)
    {
-      try
-      {
-         this._listener.Start();
-         this._logger.LogInformation($"Listening on port {Port}...");
-
-         while (!cancellationToken.IsCancellationRequested)
-         {
-            this._listener
-               .BeginGetContext(this.HandleRequest, this._listener)
-               .AsyncWaitHandle
-               .WaitOne();
-         }
-      }
-      catch (HttpListenerException ex)
-      {
-         this._logger.LogError(ex.ToString());
-         this._applicationLifetime.StopApplication();
-      }
-      finally
-      {
-         this._listener.Close();
-      }
+      this.Listen();
+      
+      while (!cancellationToken.IsCancellationRequested)
+         await this.ProcessRequests(cancellationToken);
    }
 
-   public void HandleRequest(IAsyncResult result)
+   private void Listen()
+   {
+      this._logger.LogInformation("Retryrr Service is starting...");
+      this._listener = new HttpListener();
+      this._listener.Prefixes.Add($"http://+:{Port}/");
+      this._listener.Start();
+      this._logger.LogInformation($"Listening on port {Port}...");
+   }
+   
+   private async Task ProcessRequests(CancellationToken cancellationToken) => 
+      await this._listener.BeginGetContextAsync(this.HandleRequest, cancellationToken);
+
+   private void HandleRequest(IAsyncResult result)
    {
       if (!this._listener.IsListening)
       {
@@ -84,11 +63,6 @@ public sealed class RetryrrService : BackgroundService
       }
 
       var context = this._listener.EndGetContext(result);
-      
-      // Make sure to begin another context so we can handle the next requests
-      this._listener.BeginGetContext(this.HandleRequest);
-      
-      //TODO: Send the request to the chain of handlers here.
 
       // Some test stuff with the context.
       var url = context.Request.Url?.AbsolutePath;

@@ -1,4 +1,4 @@
-FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build-env
+FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 WORKDIR /App
 
 # Copy everything
@@ -9,8 +9,8 @@ RUN dotnet restore
 RUN dotnet publish -c Release -o out
 
 # Build runtime image
-FROM mcr.microsoft.com/dotnet/aspnet:8.0
+FROM mcr.microsoft.com/dotnet/runtime:8.0
+EXPOSE 8888
 WORKDIR /App
-COPY --from=build-env /App/out .
+COPY --from=build /App/out .
 ENTRYPOINT ["dotnet", "Retryrr.Console.dll"]
-EXPOSE 80

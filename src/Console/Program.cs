@@ -17,4 +17,5 @@ builder.ConfigureInfra();
 builder.ConfigureApplication();
 
 // Build and run
-await builder.Build().RunAsync();
+var host = builder.Build();
+await host.RunAsync();
