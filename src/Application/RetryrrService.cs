@@ -46,7 +46,7 @@ public sealed class RetryrrService : BackgroundService
    {
       this._logger.LogInformation("Retryrr Service is starting...");
       this._listener = new HttpListener();
-      this._listener.Prefixes.Add($"http://+:{Port}/");
+      this._listener.Prefixes.Add($"http://*:{Port}/");
       this._listener.Start();
       this._logger.LogInformation($"Listening on port {Port}...");
    }
