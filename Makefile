@@ -7,4 +7,8 @@ restore:
 watch:
 	dotnet watch --project ./src/Console/Retryrr.Console.csproj run
 run:
-	cd src/Console && dotnet run
+	dotnet run --project src/Console/Retryrr.Console.csproj
+dbuild:
+	docker buildx build -t retryrr -f Dockerfile . --no-cache
+drun:
+	docker run -it --rm -p 8888:8888 --name retryrr-dev retryrr

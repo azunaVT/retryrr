@@ -4,6 +4,11 @@ namespace Retryrr.Application.Utils;
 
 public static class HttpListenerExtensions
 {
-    public static IAsyncResult BeginGetContext(this HttpListener listener, AsyncCallback? callback) =>
-        listener.BeginGetContext(callback, null);
+    public static async Task BeginGetContextAsync(
+        this HttpListener listener, 
+        AsyncCallback? callback, 
+        CancellationToken cancellationToken) =>
+        await Task.Factory
+            .FromAsync(listener.BeginGetContext(callback, null), _ => { })
+            .HandleCancellation(cancellationToken);
 }

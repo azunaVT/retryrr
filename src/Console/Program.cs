@@ -11,10 +11,12 @@ var builder = Host.CreateApplicationBuilder(new HostApplicationBuilderSettings
 
 // Add configuration from environment variables
 builder.Configuration.AddEnvironmentVariables(prefix: "RETRYRR_");
+builder.Configuration.AddJsonFile("appsettings.json");
 
 // Configure the app
 builder.ConfigureInfra();
 builder.ConfigureApplication();
 
 // Build and run
-await builder.Build().RunAsync();
+var host = builder.Build();
+await host.RunAsync();
